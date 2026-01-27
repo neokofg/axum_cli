@@ -16,6 +16,7 @@ pub fn print_warning(message: &str) {
     println!("{} {}", "⚠".yellow().bold(), message);
 }
 
+#[allow(dead_code)]
 pub fn print_error(message: &str) {
     eprintln!("{} {}", "✗".red().bold(), message);
 }
@@ -68,6 +69,7 @@ pub async fn run_command(cmd: &str, args: &[&str]) -> Result<()> {
     Ok(())
 }
 
+#[allow(dead_code)]
 pub async fn run_command_with_output(cmd: &str, args: &[&str]) -> Result<String> {
     let output = Command::new(cmd)
         .args(args)
@@ -108,6 +110,7 @@ pub fn to_pascal_case(s: &str) -> String {
     heck::AsUpperCamelCase(s).to_string()
 }
 
+#[allow(dead_code)]
 pub fn to_kebab_case(s: &str) -> String {
     heck::AsKebabCase(s).to_string()
 }
@@ -129,12 +132,12 @@ pub fn pluralize(s: &str) -> String {
 }
 
 pub fn singularize(s: &str) -> String {
-    if s.ends_with("ies") {
-        format!("{}y", &s[..s.len() - 3])
-    } else if s.ends_with("es") {
-        s[..s.len() - 2].to_string()
-    } else if s.ends_with('s') && s.len() > 1 {
-        s[..s.len() - 1].to_string()
+    if let Some(stripped) = s.strip_suffix("ies") {
+        format!("{}y", stripped)
+    } else if let Some(stripped) = s.strip_suffix("es") {
+        stripped.to_string()
+    } else if let Some(stripped) = s.strip_suffix('s') {
+        stripped.to_string()
     } else {
         s.to_string()
     }

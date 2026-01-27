@@ -3,7 +3,7 @@ name = "axum-cli"
 version = "0.1.0"
 edition = "2024"
 description = "CLI tool for axum_template project scaffolding and development"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["neoko"]
 
 [[bin]]
 name = "axum"
@@ -36,3 +36,9 @@ indicatif = "0.17"
 anyhow = "1"
 chrono = "0.4"
 which = "7"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

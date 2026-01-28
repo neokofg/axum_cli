@@ -10,7 +10,7 @@ pub async fn new_project(name: &str, template: Option<&str>) -> Result<()> {
         anyhow::bail!("Directory '{}' already exists", name);
     }
 
-    let template_url = template.unwrap_or("https://github.com/your-org/axum-template.git");
+    let template_url = template.unwrap_or("https://github.com/neokofg/axum_template");
 
     print_info(&format!("Creating new project: {}", name));
 
